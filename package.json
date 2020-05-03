@@ -1,13 +1,13 @@
 {
   "name": "@reason-react-native/safe-area-context",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "publishConfig": {
     "access": "public"
   },
   "peerDependencies": {
+    "react-native-safe-area-context": "^1.0.0",
     "reason-react": "^0.7.0",
-    "reason-react-native": "^0.61.0",
-    "react-native-safe-area-context": "^0.7.0"
+    "reason-react-native": "^0.62.0"
   },
   "repository": "https://github.com/reason-react-native/safe-area-context.git",
   "license": "MIT",
@@ -44,7 +44,7 @@
     "npmpub": "^5.0.0",
     "prettier": "^1.18.0",
     "reason-react": "^0.7.0",
-    "reason-react-native": "^0.61.0"
+    "reason-react-native": "https://github.com/reason-react-native/reason-react-native.git#e91e045"
   },
   "prettier": {
     "trailingComma": "all",

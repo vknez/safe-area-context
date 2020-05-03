@@ -1,29 +1,56 @@
 type insets = {
-  .
-  "top": float,
-  "bottom": float,
-  "left": float,
-  "right": float,
+  top: float,
+  bottom: float,
+  left: float,
+  right: float,
+};
+
+type frame = {
+  x: float,
+  y: float,
+  width: float,
+  height: float,
+};
+
+type metrics = {
+  insets,
+  frame,
 };
 
 [@bs.module "react-native-safe-area-context"]
-external initialWindowSafeAreaInsets: insets = "initialWindowSafeAreaInsets";
+external initialWindowMetrics: metrics = "initialWindowMetrics";
+
+[@bs.module "react-native-safe-area-context"]
+external useSafeAreaInsets: unit => insets = "useSafeAreaInsets";
+
+[@bs.module "react-native-safe-area-context"]
+external useSafeAreaFrame: unit => frame = "useSafeAreaFrame";
+
+module SafeAreaInsetsContext = {
+  module Consumer = {
+    [@react.component]
+    [@bs.module "react-native-safe-area-context"]
+    [@bs.scope "SafeAreaInsetsContext"]
+    external make: (~children: insets => React.element=?) => React.element =
+      "Consumer";
+  };
+};
+
+module SafeAreaFrameContext = {
+  module Consumer = {
+    [@react.component]
+    [@bs.module "react-native-safe-area-context"]
+    [@bs.scope "SafeAreaFrameContext"]
+    external make: (~children: frame => React.element=?) => React.element =
+      "Consumer";
+  };
+};
 
 module SafeAreaProvider = {
   [@react.component] [@bs.module "react-native-safe-area-context"]
   external make:
-    (~initialSafeAreaInsets: insets, ~children: React.element=?) =>
-    React.element =
+    (~initialMetrics: metrics, ~children: React.element=?) => React.element =
     "SafeAreaProvider";
-};
-
-[@bs.module "react-native-safe-area-context"]
-external useSafeArea: unit => insets = "useSafeArea";
-
-module SafeAreaConsumer = {
-  [@react.component] [@bs.module "react-native-safe-area-context"]
-  external make: (~children: insets => React.element=?) => React.element =
-    "SafeAreaConsumer";
 };
 
 module SafeAreaView = {
@@ -60,10 +87,21 @@ module SafeAreaView = {
                             | `header
                             | `summary
                             | `imagebutton
+                            | `article
+                            | `banner
+                            | `complementary
+                            | `contentinfo
+                            | `form
+                            | `list
+                            | `listitem
+                            | `main
+                            | `navigation
+                            | `region
                           ]
                             =?,
-      ~accessibilityStates: array(AccessibilityState.t)=?,
+      ~accessibilityState: Accessibility.state=?,
       ~accessibilityTraits: array(AccessibilityTrait.t)=?,
+      ~accessibilityValue: Accessibility.value=?,
       ~accessibilityViewIsModal: bool=?,
       ~accessible: bool=?,
       ~collapsable: bool=?,
@@ -107,7 +145,15 @@ module SafeAreaView = {
       ~shouldRasterizeIOS: bool=?,
       ~style: Style.t=?,
       ~testID: string=?,
-      ~children: React.element=?
+      ~children: React.element=?,
+      // React Native Web Props
+      ~onMouseDown: ReactEvent.Mouse.t => unit=?,
+      ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
+      ~onMouseLeave: ReactEvent.Mouse.t => unit=?,
+      ~onMouseMove: ReactEvent.Mouse.t => unit=?,
+      ~onMouseOver: ReactEvent.Mouse.t => unit=?,
+      ~onMouseOut: ReactEvent.Mouse.t => unit=?,
+      ~onMouseUp: ReactEvent.Mouse.t => unit=?
     ) =>
     React.element =
     "SafeAreaView";

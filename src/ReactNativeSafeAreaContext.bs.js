@@ -2,13 +2,24 @@
 
 var View$ReactNative = require("reason-react-native/src/components/View.bs.js");
 
-var SafeAreaProvider = { };
+var Consumer = { };
 
-var SafeAreaConsumer = { };
+var SafeAreaInsetsContext = {
+  Consumer: Consumer
+};
+
+var Consumer$1 = { };
+
+var SafeAreaFrameContext = {
+  Consumer: Consumer$1
+};
+
+var SafeAreaProvider = { };
 
 var SafeAreaView = { };
 
+exports.SafeAreaInsetsContext = SafeAreaInsetsContext;
+exports.SafeAreaFrameContext = SafeAreaFrameContext;
 exports.SafeAreaProvider = SafeAreaProvider;
-exports.SafeAreaConsumer = SafeAreaConsumer;
 exports.SafeAreaView = SafeAreaView;
 /* View-ReactNative Not a pure module */
